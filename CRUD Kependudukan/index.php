@@ -237,7 +237,7 @@ if (isset($_POST['Hapus'])){
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Alamat</label>
+                      <label for="exampleInputPassword1">Alamats</label>
                       <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat">
                     </div>
                     <div class="form-group">
