@@ -32,19 +32,8 @@ class penduduk{
   public $asal;
   public $tanggal;
   public $darah;
-  public $nikEdit;
-  public $namaEdit;
-  public $genderEdit;
-  public $alamatEdit;
-  public $statusEdit;
-  public $pekerjaanEdit;
-  public $wargaEdit;
-  public $asalEdit;
-  public $tanggalEdit;
-  public $darahEdit;
-  public $idEdit;
 
-  function set_all_data($nik,$nama,$gender,$alamat,$status,$pekerjaan,$warga,$asal,$tanggal,$darah,$nikEdit,$namaEdit,$genderEdit,$alamatEdit,$statusEdit,$pekerjaanEdit,$wargaEdit,$asalEdit,$tanggalEdit,$darahEdit,$idEdit){
+  function set_all_data($nik,$nama,$gender,$alamat,$status,$pekerjaan,$warga,$asal,$tanggal,$darah){
     $this->nik=$nik;
     $this->nama=$nama;
     $this->gender=$gender;
@@ -55,81 +44,6 @@ class penduduk{
     $this->asal=$asal;
     $this->tanggal=$tanggal;
     $this->darah=$darah;
-    $this->nikEdit=$nikEdit;
-    $this->namaEdit=$namaEdit;
-    $this->genderEdit=$genderEdit;
-    $this->alamatEdit=$alamatEdit;
-    $this->statusEdit=$statusEdit;
-    $this->pekerjaanEdit=$pekerjaanEdit;
-    $this->wargaEdit=$wargaEdit;
-    $this->asalEdit=$asalEdit;
-    $this->tanggalEdit=$tanggalEdit;
-    $this->darahEdit=$darahEdit;
-    $this->idEdit=$idEdit;
-  }
-
-  function get_nik(){
-    return $this->nik;
-  }
-  function get_nama(){
-    return $this->nama;
-  }
-  function get_gender(){
-    return $this->gender;
-  }
-  function get_alamat(){
-    return $this->alamat;
-  }
-  function get_status(){
-    return $this->status;
-  }
-  function get_pekerjaan(){
-    return $this->pekerjaan;
-  }
-  function get_warga(){
-    return $this->warga;
-  }
-  function get_asal(){
-    return $this->asal;
-  }
-  function get_tanggal(){
-    return $this->tanggal;
-  }
-  function get_darah(){
-    return $this->darah;
-  }
-  function get_nikEdit(){
-    return $this->nikEdit;
-  }
-  function get_namaEdit(){
-    return $this->namaEdit;
-  }
-  function get_genderEdit(){
-    return $this->genderEdit;
-  }
-  function get_alamatEdit(){
-    return $this->alamatEdit;
-  }
-  function get_statusEdit(){
-    return $this->statusEdit;
-  }
-  function get_pekerjaanEdit(){
-    return $this->pekerjaanEdit;
-  }
-  function get_wargaEdit(){
-    return $this->wargaEdit;
-  }
-  function get_asalEdit(){
-    return $this->asalEdit;
-  }
-  function get_tanggalEdit(){
-    return $this->tanggalEdit;
-  }
-  function get_darahEdit(){
-    return $this->darahEdit;
-  }
-  function get_idEdit(){
-    return $this->idEdit;
   }
 
   // TAMBAH PENDUDUK
@@ -148,12 +62,6 @@ class penduduk{
     $hapus = "DELETE FROM data WHERE id_penduduk = '$id'";
     $proses_hapus = mysqli_query($koneksi,$hapus);
     return "Berhasil Hapus";
-  }
-
-  function edit_data($koneksi,$nikEdit,$namaEdit,$genderEdit,$alamatEdit,$statusEdit,$pekerjaanEdit,$wargaEdit,$asalEdit,$tanggalEdit,$darahEdit,$idEdit){
-    $edit = "UPDATE data SET nik='$nikEdit', nama='$namaEdit', gender='$genderEdit', alamat='$alamatEdit', status='$statusEdit', pekerjaan='$pekerjaanEdit', warga='$wargaEdit', asal='$asalEdit', tanggal='$tanggalEdit', darah='$darahEdit' WHERE id_penduduk='$idEdit'";
-    $proses_edit = mysqli_query($koneksi,$edit);
-    return "Berhasil Edit";
   }
 }
 
@@ -191,26 +99,6 @@ if (isset($_POST['Hapus'])){
     $hapus_data = $penduduk_hapus->hapus_data($koneksi,$_POST['id']);
  
     $data_penduduk_db = $penduduk_hapus->ambildata_penduduk($koneksi);    
-  }
-}
-
-if(isset($_POST['submitEdit']) and isset($_POST['Edit'])){
-  if($_POST['nikEdit'] !='' and $_POST['namaEdit'] !='' and $_POST['genderEdit'] !='' and $_POST['alamatEdit'] !='' and $_POST['statusEdit'] !='' and $_POST['pekerjaanEdit'] !='' and $_POST['wargaEdit'] !='' and $_POST['asalEdit'] !='' and $_POST['tanggalEdit'] !='' and $_POST['darahEdit'] !='' ){
-    $post_nik_edit = $_POST['nikEdit'];
-    $post_nama_edit = $_POST['namaEdit'];
-    $post_gender_edit = $_POST['genderEdit'];
-    $post_alamat_edit = $_POST['alamatEdit'];
-    $post_status_edit = $_POST['statusEdit'];
-    $post_pekerjaan_edit = $_POST['pekerjaanEdit'];
-    $post_warga_edit = $_POST['wargaEdit'];
-    $post_asal_edit = $_POST['asalEdit'];
-    $post_tanggal_edit = $_POST['tanggalEdit'];
-    $post_darah_edit = $_POST['darahEdit'];
-
-    $edit_penduduk = new penduduk();
-    $edit_data = $edit_penduduk->edit_data($koneksi,$post_nik_edit,$post_nama_edit,$post_gender_edit,$post_alamat_edit,$post_status_edit,$post_pekerjaan_edit,$post_warga_edit,$post_asal_edit,$post_tanggal_edit,$post_darah_edit,$_POST['idEdit']);
-
-    $edit_penduduk_db = $edit_penduduk->ambildata_penduduk($koneksi);
   }
 }
 
@@ -309,12 +197,7 @@ if(isset($_POST['submitEdit']) and isset($_POST['Edit'])){
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <?php if(isset($_POST['Edit'])){
-                  echo "<h1>Edit Data Penduduk</h1>";
-                }else{
-                  echo "<h1>Form Data Penduduk</h1>";
-                }
-              ?>
+                <h1>Form Data Penduduk</h1>
             </div>
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -340,140 +223,69 @@ if(isset($_POST['submitEdit']) and isset($_POST['Edit'])){
                   <div class="card-body">
                     <div class="form-group">
                       <label for="exampleInputPassword1">NIK</label>
-                      <?php if(isset($_POST['Edit'])){
-                        echo '<input type="text" class="form-control" id="nikEdit" name="nikEdit" placeholder="Masukkan NIK Baru">';
-                      }else{
-                        echo '<input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK">';
-                      }
-                      ?>
+                      <input type="text" class="form-control" id="nik" name="nik" placeholder="Masukkan NIK">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputEmail1">Nama</label>
-                      <?php if(isset($_POST['Edit'])){
-                        echo '<input type="text" class="form-control" id="namaEdit" name="namaEdit" placeholder="Masukkan Nama Baru">';
-                      }else{
-                        echo '<input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama">';
-                      }
-                      ?>
+                      <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan Nama">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputFile">Jenis Kelamin</label>
-                      <?php if(isset($_POST['Edit'])){
-                        echo '<select class="form-control" id="genderEdit" name="genderEdit">
+                      <select class="form-control" id="gender" name="gender">
                         <option value="Laki-laki">Laki-laki</option>
                         <option value="Perempuan">Perempuan</option>
-                      </select>';
-                      }else{
-                        echo '<select class="form-control" id="gender" name="gender">
-                        <option value="Laki-laki">Laki-laki</option>
-                        <option value="Perempuan">Perempuan</option>
-                      </select>';
-                      }
-                      ?>
+                      </select>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Alamat</label>
-                      <?php if(isset($_POST['Edit'])){
-                        echo '<input type="text" class="form-control" id="alamatEdit" name="alamatEdit" placeholder="Masukkan Alamat Baru">';
-                      }else{
-                        echo '<input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat">';
-                      }
-                      ?>
+                      <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Masukkan Alamat">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputFile">Status Perkawinan</label>
-                      <?php if(isset($_POST['Edit'])){
-                        echo '<select class="form-control" name="statusEdit" id="statusEdit">
+                      <select class="form-control" name="status" id="status">
                         <option value="Belum Kawin">Belum Kawin</option>
                         <option value="Kawin">Kawin</option>
                         <option value="Cerai Hidup">Cerai Hidup</option>
                         <option value="Cerai Mati">Cerai Mati</option>
-                      </select>';
-                      }else{
-                        echo '<select class="form-control" name="status" id="status">
-                        <option value="Belum Kawin">Belum Kawin</option>
-                        <option value="Kawin">Kawin</option>
-                        <option value="Cerai Hidup">Cerai Hidup</option>
-                        <option value="Cerai Mati">Cerai Mati</option>
-                      </select>';
-                      }
-                      ?>
+                      </select>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Pekerjaan</label>
-                      <?php if(isset($_POST['Edit'])){
-                        echo '<input type="text" class="form-control" id="pekerjaanEdit" name="pekerjaanEdit" placeholder="Masukkan Pekerjaan Baru">';
-                      }else{
-                        echo '<input type="text" class="form-control" id="pekerjaan" name="pekerjaan" placeholder="Masukkan Pekerjaan">';
-                      }
-                      ?>
+                      <input type="text" class="form-control" id="pekerjaan" name="pekerjaan" placeholder="Masukkan Pekerjaan">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputFile">Kewarganegaraan</label>
-                      <?php if(isset($_POST['Edit'])){
-                        echo '<select class="form-control" name="wargaEdit" id="wargaEdit">
+                      <select class="form-control" name="warga" id="warga">
                         <option value="WNI">WNI</option>
                         <option value="WNA">WNA</option>
-                      </select>';
-                      }else{
-                        echo '<select class="form-control" name="warga" id="warga">
-                        <option value="WNI">WNI</option>
-                        <option value="WNA">WNA</option>
-                      </select>';
-                      }
-                      ?>
+                      </select>
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Tempat Lahir</label>
-                      <?php if(isset($_POST['Edit'])){
-                        echo '<input type="text" class="form-control" id="asalEdit" name="asalEdit" placeholder="Masukkan Tempat Lahir Baru">';
-                      }else{
-                        echo '<input type="text" class="form-control" id="asal" name="asal" placeholder="Masukkan Tempat Lahir">';
-                      }
-                      ?>
+                      <input type="text" class="form-control" id="asal" name="asal" placeholder="Masukkan Tempat Lahir">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputPassword1">Tanggal Lahir</label>
-                      <?php if(isset($_POST['Edit'])){
-                        echo '<input type="date" class="form-control" id="tanggalEdit" name="tanggalEdit">';
-                      }else{
-                        echo '<input type="date" class="form-control" id="tanggal" name="tanggal">';
-                      }
-                      ?>
+                      <input type="date" class="form-control" id="tanggal" name="tanggal">
                     </div>
                     <div class="form-group">
                       <label for="exampleInputFile">Golongan Darah</label>
-                      <?php if(isset($_POST['Edit'])){
-                        echo '<select class="form-control" name="darahEdit" id="darahEdit">
+                      <select class="form-control" name="darah" id="darah">
                         <option value="A">A</option>
                         <option value="B">B</option>
                         <option value="AB">AB</option>
                         <option value="O">O</option>
-                      </select>';
-                      }else{
-                        echo '<select class="form-control" name="darah" id="darah">
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="AB">AB</option>
-                        <option value="O">O</option>
-                      </select>';
-                      }
-                      ?>
+                      </select>
                     </div>
                   </div>
                   <!-- /.card-body -->
                   <div class="card-footer">
-                    <?php if(isset($_POST['Edit'])){
-                      echo '<button name="submitEdit" type="submit" class="btn btn-block1 btn-outline-info">Submit Edit</button>';
-                    }else{
-                      echo '<button name="submit" type="submit" class="btn btn-block1 btn-outline-info">Submit Tambah</button>';
-                    }
-                    ?>
+                    <button name="submit" type="submit" class="btn btn-block1 btn-outline-info">Submit Tambah</button>
                   </div>
                 </form>
               </div>
               <!-- /.card -->
-              <?php if(isset($_POST['submit']) or isset($_POST['Hapus']) or isset($_POST['submitEdit'])){ ?>
+              <?php if(isset($_POST['submit']) or isset($_POST['Hapus'])){ ?>
               <!--TABEL DATA-->
               <div class="row">
                 <div class="col-12">
@@ -513,8 +325,8 @@ if(isset($_POST['submitEdit']) and isset($_POST['Edit'])){
                                 <input type="hidden" class="form-control" id="id" name='id' value='<?=$semua_data_ok['id_penduduk'];?>'>
                                 <input name='Hapus' value='Hapus' type="submit">
                               </form>
-                              <form action='' method="post">
-                                <input type="hidden" class="form-control" id="idEdit" name='idEdit' value='<?=$semua_data_ok['id_penduduk'];?>'>
+                              <form action='edit.php' method="post">
+                                <input type="hidden" type="hidden" class="form-control" id="id" name='id' value='<?=$semua_data_ok['id_penduduk'];?>'>
                                 <input name='Edit' value='Edit' type="submit">
                               </form>
                             </td> 
